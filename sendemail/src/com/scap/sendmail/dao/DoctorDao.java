@@ -27,17 +27,7 @@ import com.scap.sendmail.util.DbConnector;
 public class DoctorDao {
 	
 	
-/* public static void main(String[] args) {
-	 DoctorDao voDoctorDao = new DoctorDao();
-	 try {
-		 ArrayList<MstDoctor>  getDoctorPaymentDatatable = voDoctorDao.getDoctorPaymentDatatable("VTN01", "2015", "01");
-	
-		 
-	 } catch (Exception e) {
-		e.printStackTrace();
-	}
-	 
-}*/
+ 
 	
 	public ArrayList<MstDoctor>  getDoctorPaymentDatatable(String hospitalCode, String yyyy, String mm) throws Exception {
 

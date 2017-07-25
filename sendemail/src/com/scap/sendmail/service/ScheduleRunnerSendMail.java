@@ -23,29 +23,10 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 public class ScheduleRunnerSendMail {
 	
-	public static void main(String[] args) {
-	    //File resourcesDirectory = new File("jasperReportFile/SummaryDFUnpaidSubreport.jasper");
-		//ClassLoader loader = jasperReportFile.class.getClassLoader();
-       // System.out.println(resourcesDirectory.getAbsolutePath());
-		
-		  
-		
-		  ScheduleRunnerSendMail test = new ScheduleRunnerSendMail();
-		 /*URL location = ScheduleRunnerSendMail.class.getProtectionDomain().getCodeSource().getLocation();
-		 String path  = location.getPath().substring(1, location.getPath().length()-1).replace("/", "\\");
-	     System.out.println(location.getPath().substring(1, location.getPath().length()-1).replace("/", "\\"));*/
-		  
-		  String absoluteDiskPath = Paths.get("").toFile().getAbsolutePath()+"\\jasperReport"; 
-			System.out.println("absoluteDiskPath "+absoluteDiskPath); 
-			
-			
-			/*File file = new File(absoluteDiskPath);
-			if (!file.isDirectory())
-			   file = file.getParentFile();
-			if (file.exists()){
-				System.out.println("exist file  "+absoluteDiskPath);
-			}*/
-		  
+	public static void main(String[] args) { 
+		  ScheduleRunnerSendMail test = new ScheduleRunnerSendMail(); 
+		   
+	 
 		try {
 			 System.out.println("=========================== Begin of sending email  process ===================================");
 				
@@ -79,58 +60,18 @@ public class ScheduleRunnerSendMail {
 			SentEmailService sentEmailService = new SentEmailService();
 
 			// get list of Doctor
-			ArrayList<MstDoctor> lstDoctor = sentEmailService.getLstDoctor(hospitalCode, "2015", "01");
+			ArrayList<MstDoctor> lstDoctor = sentEmailService.getLstDoctor(hospitalCode, yyyy,mm);
 			if (lstDoctor.size() != 0 && lstDoctor != null) {
 				for (int i = 0; i < lstDoctor.size(); i++) {
 					InputStream jasperStream1 = getClass().getClassLoader().getResourceAsStream("PaymentVoucher.jasper");
 					InputStream jasperStream2 = getClass().getClassLoader().getResourceAsStream("SummaryRevenueByDetail.jasper");
 					InputStream jasperStream3 = getClass().getClassLoader().getResourceAsStream("ExpenseDetail.jasper");
 					InputStream jasperStream4 = getClass().getClassLoader().getResourceAsStream("SummaryDFUnpaidByDetailAsOfDate.jasper");
-				 
-
-                    ////////ok 
-					//File resourcesDirectory = new File(getClass().getClassLoader()+"");
+				  
 					String absoluteDiskPath = Paths.get("").toFile().getAbsolutePath()+"\\jasperReportFile"; 
 					System.out.println("absoluteDiskPath "+absoluteDiskPath);
 					
-					
-					
-					/*File f = new File(absoluteDiskPath+"\\SummaryDFUnpaidSubreport.jasper");
-					System.out.println(" path file "+f);
-					System.out.println(" getAbsoluteFile   " + f.getAbsoluteFile());
-					System.out.println(" path   " + f.getPath());*/
-					
-					
-					//String absoluteDiskPath =   resourcesDirectory.getAbsolutePath(); 
-					//System.out.println("absoluteDiskPath "+absoluteDiskPath);
-					
-					//URL resource = ScheduleRunnerSendMail.class.getResource("/SummaryDFUnpaidSubreport.jasper");
 					 
-					/*String absoluteDiskPath2 = resourcesDirectory.getAbsoluteFile().getAbsolutePath(); 
-					System.out.println("absoluteDiskPath2 "+absoluteDiskPath2); */
-					// File resourcesDirectory = new File(getClass().getClassLoader()+"/SummaryDFUnpaidSubreport.jasper");
-					 
-					 
-					
-					/*
-					//okk
-					File file = new File(Paths.get("").toFile().getAbsolutePath()+"\\jasperReportFile\\SummaryDFUnpaidSubreport.jasper");
-				    String absoluteDiskPath = file.getAbsolutePath().replace("\\SummaryDFUnpaidSubreport.jasper", "");
-					System.out.println(absoluteDiskPath);
-		*/
-					
-				 
-									 
-					/*String absoluteDiskPath = Paths.get("").toFile().getAbsolutePath()+"\\jasperReportFile";  
-					System.out.println("absoluteDiskPath "+absoluteDiskPath); */
-					
-					//File f = new File(absoluteDiskPath+"\\SummaryDFUnpaidSubreport.jasper");
-					/*if(f.exists() && !f.isDirectory()) { 
-					    System.out.println("exists \\SummaryDFUnpaidSubreport.jasper");
-					}*/
-					//absoluteDiskPath = f.getAbsolutePath();
-				  
-				
 			        
 					JasperReport jasperReport1 = (JasperReport) JRLoader.loadObject(jasperStream1);
 					JasperReport jasperReport2 = (JasperReport) JRLoader.loadObject(jasperStream2);
