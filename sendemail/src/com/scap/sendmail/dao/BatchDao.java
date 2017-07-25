@@ -14,7 +14,7 @@ public class BatchDao {
 		String value = "";
 		PreparedStatement ps = null;
 		
-		final String SQL = "SELECT YYYY FROM BATCH WHERE HOSPITAL_CODE = ? AND (CLOSE_DATE = '' OR CLOSE_DATE IS NULL)";
+		final String SQL = "SELECT TOP 1 YYYY FROM BATCH WHERE CLOSE_DATE <> '' ORDER BY CLOSE_DATE DESC ";
 		try (Connection conn = DbConnector.getDBConnection()) {
 			ps = conn.prepareStatement(SQL);
 			ps.setString(1, hospitalCode);
@@ -33,7 +33,7 @@ public class BatchDao {
 		String value = "";
 		PreparedStatement ps = null;
 		
-		final String SQL = "SELECT MM FROM BATCH WHERE HOSPITAL_CODE = ? AND CLOSE_DATE = ''";
+		final String SQL = "SELECT TOP 1 MM FROM BATCH WHERE CLOSE_DATE <> '' ORDER BY CLOSE_DATE DESC ";
 		try (Connection conn =  DbConnector.getDBConnection()) {
 			ps = conn.prepareStatement(SQL);
 			ps.setString(1, hospitalCode);

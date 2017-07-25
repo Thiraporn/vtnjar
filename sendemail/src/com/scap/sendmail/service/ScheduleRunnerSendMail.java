@@ -55,6 +55,12 @@ public class ScheduleRunnerSendMail {
 			BatchDao batchDao = new BatchDao();
 			String mm = batchDao.getMonth(hospitalCode);
 			String yyyy = batchDao.getYear(hospitalCode);
+			
+			System.out.println("=========Parameter==============");
+			System.out.println("mm :: "+mm);
+			System.out.println("yyyy :: "+yyyy);
+			System.out.println("hospitalCode :: "+hospitalCode); 
+			System.out.println("==================================");
 
 			DoctorDao doctorDao = new DoctorDao();
 			SentEmailService sentEmailService = new SentEmailService();
