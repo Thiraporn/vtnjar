@@ -65,11 +65,33 @@ public class ScheduleRunnerSendMail {
 			DoctorDao doctorDao = new DoctorDao();
 			SentEmailService sentEmailService = new SentEmailService();
 
+			
+			
+			
+			
 			// get list of Doctor
 			ArrayList<MstDoctor> lstDoctor = sentEmailService.getLstDoctor(hospitalCode, yyyy,mm);
+			
+			Thread myThreads = new Thread();
+			
 			if (lstDoctor.size() != 0 && lstDoctor != null) {
 				for (int i = 0; i < lstDoctor.size(); i++) {
-					InputStream jasperStream1 = getClass().getClassLoader().getResourceAsStream("PaymentVoucher.jasper");
+					
+					System.out.println(" Object : "+i+", Time : "+JDate.getTime());	
+					 myThreads = new Thread(new SendEmailMultiThread(hospitalCode, lstDoctor.get(i).getDoctorCode(), yyyy, mm));
+					 myThreads.start();
+					
+					
+					
+//					SendEmailMultiObject c = new SendEmailMultiObject(hospitalCode, doctorCode, yyyy, mm);
+//			        Thread thread = new Thread(c);
+//			        thread.start();
+					
+					
+//					new SendEmailMultiObject(hospitalCode, lstDoctor.get(i).getDoctorCode(), yyyy, mm);
+//					System.out.println(" Object : "+i+", Time : "+JDate.getTime());		
+					
+					/*InputStream jasperStream1 = getClass().getClassLoader().getResourceAsStream("PaymentVoucher.jasper");
 					InputStream jasperStream2 = getClass().getClassLoader().getResourceAsStream("SummaryRevenueByDetail.jasper");
 					InputStream jasperStream3 = getClass().getClassLoader().getResourceAsStream("ExpenseDetail.jasper");
 					InputStream jasperStream4 = getClass().getClassLoader().getResourceAsStream("SummaryDFUnpaidByDetailAsOfDate.jasper");
@@ -114,7 +136,7 @@ public class ScheduleRunnerSendMail {
 					} else {
 						message = "NO_DATA";
 					}
-					System.out.println("  ========================================================================================    ");
+					System.out.println("  ========================================================================================    ");*/
 				}
 				
 			}

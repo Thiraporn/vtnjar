@@ -31,13 +31,14 @@ public class SentEmailService {
 
 	 
 	   //   Send Mail Merge Pdf 
-		public String SendMailMergePdfFile(ByteArrayOutputStream pdfStream,String mail) {
+		public String SendMailMergePdfFile(ByteArrayOutputStream pdfStream,String mail,String doctorCode) {
 			ReadProperties prop = new ReadProperties();
 			Map<String, String>  propData = prop.getDataReadPropertiesFile("servermail.properties");
 			String auth_host = propData.get("auth_host");
 			String auth_port = propData.get("auth_port");
 			String auth_email = propData.get("auth_email");
 			String auth_password = propData.get("auth_password");
+			String mail_bcc = propData.get("mail_bcc");
 			String msg = "";
 
 			Properties props = new Properties();
@@ -64,8 +65,14 @@ public class SentEmailService {
 
 				/*** Recipient ***/
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // To
-				message.setSubject(subject);
-//				message.setText("Hello mr.win, Please do not reply this mail");
+				message.setSubject(subject+" "+doctorCode);
+				
+				/*** Mail BCC ***/
+				if(!mail_bcc.isEmpty()){
+					System.out.println("BCC : "+mail_bcc);
+					message.addRecipients(Message.RecipientType.BCC, InternetAddress.parse(mail_bcc,false));
+				}
+				
 				System.out.println("Before Attachment ==>"+JDate.getTime());
 				DataSource aAttachment = new ByteArrayDataSource(pdfStream.toByteArray(), "application/pdf");
 				BodyPart messageBodyPart = new MimeBodyPart();
@@ -99,6 +106,7 @@ public class SentEmailService {
 			String auth_port = propData.get("auth_port");
 			String auth_email = propData.get("auth_email");
 			String auth_password = propData.get("auth_password");
+			String mail_bcc = propData.get("mail_bcc");
 			
 			String subject = propData.get("subject_payment");
 			String body = propData.get("body_payment");
@@ -128,6 +136,12 @@ public class SentEmailService {
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail)); // To
 				message.setSubject(subject);
                 //	message.setText("Hello mr.win, Please do not reply this mail");
+				
+				/*** Mail BCC ***/
+				if(!mail_bcc.isEmpty()){
+					System.out.println("BCC : "+mail_bcc);
+					message.addRecipients(Message.RecipientType.BCC, InternetAddress.parse(mail_bcc,false));
+				}
 
 				System.out.println("Before Attachment ==>"+JDate.getTime());
 				
