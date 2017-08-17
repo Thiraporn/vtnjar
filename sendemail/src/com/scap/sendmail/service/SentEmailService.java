@@ -43,6 +43,7 @@ public class SentEmailService {
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", auth_host);
+			props.put("mail.smtp.starttls.enable","true");
 			props.put("mail.smtp.socketFactory.port", auth_port);
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
@@ -115,6 +116,7 @@ public class SentEmailService {
 
 			Properties props = new Properties();
 			props.put("mail.smtp.host", auth_host);
+			props.put("mail.smtp.starttls.enable","true");
 			props.put("mail.smtp.socketFactory.port", auth_port);
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
