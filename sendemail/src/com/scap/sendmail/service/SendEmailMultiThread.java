@@ -20,27 +20,35 @@ public class SendEmailMultiThread implements Runnable{
 	String doctorCode;
 	String yyyy;
 	String mm ;
-	
+	//int doctorNo;
+	//String dateStamp;
+
 	public SendEmailMultiThread(String hospitalCode,String doctorCode,String yyyy,String mm) throws Exception{
 		
 		this.hospitalCode  = hospitalCode;
 		this.doctorCode = doctorCode;
-		this.yyyy = yyyy;
+		this.yyyy = yyyy; 
 		this.mm = mm;
 		
-	}
+	} 
+	
+	//public SendEmailMultiThread(int doctorNo, String dateStamp) throws Exception{
+		
+		//this.doctorNo = doctorNo;
+		//this.dateStamp = dateStamp;
+	//}
 
 	@Override
 	public void run() {
 		
-		
+		//System.out.println("Date time :" + dateStamp + " >>> Thread is running..." + doctorNo);
 		ArrayList<HashMap<String, String>> arrData = null;
 		String email = "";
 		String message = "";
 		PrepareFileToSendMailService prepareFile = new PrepareFileToSendMailService();
 		SentEmailService sentEmail = new SentEmailService();
 		ByteArrayOutputStream bosMergePdf = null;
-		DoctorDao doctorDao = new DoctorDao();
+		DoctorDao doctorDao = new DoctorDao(); 
 		
 		
 		InputStream jasperStream1 = getClass().getClassLoader().getResourceAsStream("PaymentVoucher.jasper");
@@ -118,7 +126,7 @@ public class SendEmailMultiThread implements Runnable{
 			message = "NO_DATA";
 		}
 		System.out.println("  ========================================================================================    ");
-
+	
 		
 	}
 

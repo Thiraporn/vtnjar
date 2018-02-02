@@ -73,13 +73,19 @@ public class ScheduleRunnerSendMail {
 			ArrayList<MstDoctor> lstDoctor = sentEmailService.getLstDoctor(hospitalCode, yyyy,mm);
 			
 			Thread myThreads = new Thread();
-			
+			//int amontDortor = 500;
+			int amontSleep = 200;
 			if (lstDoctor.size() != 0 && lstDoctor != null) {
 				for (int i = 0; i < lstDoctor.size(); i++) {
-					
-					System.out.println(" Object : "+i+", Time : "+JDate.getTime());	
-					 myThreads = new Thread(new SendEmailMultiThread(hospitalCode, lstDoctor.get(i).getDoctorCode(), yyyy, mm));
-					 myThreads.start();
+					if (i == amontSleep) {
+						amontSleep = amontSleep + 200;
+						myThreads.sleep(180000);
+						System.out.println("++++++++++++++++++++ Sleep +++++++++++++++++++++");
+					} else {
+						myThreads = new Thread(new SendEmailMultiThread(hospitalCode, lstDoctor.get(i).getDoctorCode(), yyyy, mm));
+						//myThreads = new Thread(new SendEmailMultiThread(i, JDate.getTime()));
+						myThreads.start();
+					}
 					
 					
 					
@@ -137,7 +143,7 @@ public class ScheduleRunnerSendMail {
 						message = "NO_DATA";
 					}
 					System.out.println("  ========================================================================================    ");*/
-				}
+				} 
 				
 			}
 
